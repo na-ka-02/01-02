@@ -6,6 +6,7 @@
 #include "Model.h"
 #include "Sprite.h"
 #include "ViewProjection.h"
+#include "DebugCamera.h"
 #include "WorldTransform.h"
 
 /// <summary>
@@ -54,8 +55,10 @@ private: // メンバ変数
 
 	//スプライト
 	Sprite* sprite_ = nullptr;
-	//#Dモデル
+	//3Dモデル
 	Model* model_ = nullptr;
+	//デバックカメラ
+	DebugCamera*debugCamera_=nullptr;
 
 	//ワールドトランスフォーム
 	WorldTransform worldTransform_;
