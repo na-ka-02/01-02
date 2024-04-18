@@ -28,14 +28,14 @@ void GameScene::Initialize() {
 	//3Dモデルの生成
 	model_ = Model::Create();
 	//デバッグカメラの生成
-	debugCamera_=new DebugCamera(1680,720);
-	
+	debugCamera_ = new DebugCamera(1680, 720);
+
 	//サウンドデータの読み込み
 	soundDataHandle_ = audio_->LoadWave("fanfare.wav");
 	//音声再生
 	audio_->PlayWave(soundDataHandle_);
 	//音声再生
-	voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
+	//voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
 
 	//ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
@@ -65,7 +65,12 @@ void GameScene::Update() {
 	//スペースキーを押した瞬間
 	if (input_->TriggerKey(DIK_SPACE)) {
 		//音声停止
-		audio_->StopWave(voiceHandle_);
+		if (audio_->IsPlaying(voiceHandle_)) {
+			audio_->StopWave(voiceHandle_);
+		}
+		else {
+			voiceHandle_ = audio_->PlayWave(soundDataHandle_, true);
+		}
 	}
 
 	//デバッグカメラの更新
